@@ -12,6 +12,46 @@ canvas.width = canvasWidth * dpr;
 canvas.height = canvasHeight * dpr;
 ctx.scale(dpr, dpr);
 
+const feGaussianBlur = document.querySelector("feGaussianBlur");
+const feColorMatrix = document.querySelector("feColorMatrix");
+
+// 앞서 커스텀 필터를 만들 때 주입한 값들을 초기값으로 설정합니다.
+const controls = {
+  blueValue: 40,
+  alphaChannel: 100,
+  alphaOffset: -23,
+  acc: 1.03,
+};
+
+let gui = new dat.GUI();
+
+const f1 = gui.addFolder("Gooey Effect");
+f1.open();
+const f2 = gui.addFolder("Particle Property");
+
+// 4가지 인자를 넣어줍니다.
+// controls의 blueValue를 최소0 최대100 사이에서 테스트해본다는 의미입니다.
+f1.add(controls, "blueValue", 0, 100).onChange((value) => {
+  // 여기서 svg 요소를 가져와서 실시간으로 반영하도록 합니다.
+  feGaussianBlur.setAttribute("stdDeviation", value);
+});
+f1.add(controls, "alphaChannel", 1, 200).onChange((value) => {
+  feColorMatrix.setAttribute(
+    "values",
+    `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${value} ${controls.alphaOffset}`
+  );
+});
+f1.add(controls, "alphaOffset", -40, 40).onChange((value) => {
+  feColorMatrix.setAttribute(
+    "values",
+    `1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${controls.alphaChannel} ${value}`
+  );
+});
+// 5번째 인자는 스텝입니다. 얼마만큼 변화를 줄것인지에 관한 값입니다.
+f2.add(controls, "acc", 1, 1.5, 0.01).onChange((value) => {
+  particles.forEach((particle) => (particle.acc = value));
+});
+
 class Particle {
   constructor(x, y, radius, vy) {
     this.x = x;
