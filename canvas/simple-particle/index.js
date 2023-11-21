@@ -2,15 +2,33 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const dpr = window.devicePixelRatio;
 
-const canvasWidth = innerWidth;
-const canvasHeight = innerHeight;
+let canvasWidth;
+let canvasHeight;
+let particles;
 
-canvas.style.width = canvasWidth + "px";
-canvas.style.height = canvasHeight + "px";
+function init() {
+  // 관련 사이즈 코드를 init 함수 내부로 옮깁니다.
+  canvasWidth = innerWidth;
+  canvasHeight = innerHeight;
 
-canvas.width = canvasWidth * dpr;
-canvas.height = canvasHeight * dpr;
-ctx.scale(dpr, dpr);
+  canvas.style.width = canvasWidth + "px";
+  canvas.style.height = canvasHeight + "px";
+
+  canvas.width = canvasWidth * dpr;
+  canvas.height = canvasHeight * dpr;
+  ctx.scale(dpr, dpr);
+
+  particles = [];
+  const TOTAL = canvasWidth / 30;
+  for (let i = 0; i < TOTAL; i++) {
+    const x = randomNumBetween(0, canvasWidth);
+    const y = randomNumBetween(0, canvasHeight);
+    const vy = randomNumBetween(1, 5);
+    const radius = randomNumBetween(50, 100);
+    const particle = new Particle(x, y, radius, vy);
+    particles.push(particle);
+  }
+}
 
 const feGaussianBlur = document.querySelector("feGaussianBlur");
 const feColorMatrix = document.querySelector("feColorMatrix");
@@ -73,17 +91,17 @@ class Particle {
   }
 }
 
-const TOTAL = 10;
+// const TOTAL = 10;
 const randomNumBetween = (min, max) => Math.random() * (max - min + 1) + min;
-let particles = [];
-for (let i = 0; i < TOTAL; i++) {
-  const x = randomNumBetween(0, canvasWidth);
-  const y = randomNumBetween(0, canvasHeight);
-  const vy = randomNumBetween(1, 5);
-  const radius = randomNumBetween(50, 100);
-  const particle = new Particle(x, y, radius, vy);
-  particles.push(particle);
-}
+// let particles = [];
+// for (let i = 0; i < TOTAL; i++) {
+//   const x = randomNumBetween(0, canvasWidth);
+//   const y = randomNumBetween(0, canvasHeight);
+//   const vy = randomNumBetween(1, 5);
+//   const radius = randomNumBetween(50, 100);
+//   const particle = new Particle(x, y, radius, vy);
+//   particles.push(particle);
+// }
 
 let interval = 1000 / 60;
 let now, delta;
@@ -111,4 +129,10 @@ function animate() {
   then = now - (delta % interval);
 }
 
-animate();
+window.addEventListener("load", () => {
+  init();
+  animate();
+});
+window.addEventListener("resize", () => {
+  init();
+});
