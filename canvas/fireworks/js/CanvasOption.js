@@ -7,5 +7,6 @@ export default class CanvasOption {
     this.interval = 1000 / this.fps;
     this.canvasWidth = innerWidth;
     this.canvasHeight = innerHeight;
+    this.bgColor = "#000000"; // 매 프레임마다 캔버스를 지워주기 위해 bgColor를 선언합니다.
   }
 }
