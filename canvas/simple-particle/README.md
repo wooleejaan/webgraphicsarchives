@@ -9,6 +9,6 @@ particle이 겹칠 경우 gooey effect가 함께합니다.
 
 html5 canvas의 기본을 익힙니다.
 
-## References
+## App Demo
 
-[맛있는 코딩 yummy coding](https://www.youtube.com/channel/UCyIn03aZJHoBIddySz9NKOA)<br>
+![rain drop](./docs/rain-drop.gif)
