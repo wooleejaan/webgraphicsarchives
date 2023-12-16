@@ -5,4 +5,29 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#ring {
+  position: absolute;
+  // 반지름이 25vh이므로
+  width: 50vh;
+  height: 50vh;
+}
+
+#countdown {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+#countdown > span {
+  position: absolute;
+  font-size: 7rem;
+  transform: scale(5);
+  opacity: 0;
 }

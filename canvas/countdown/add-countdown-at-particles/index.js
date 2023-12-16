@@ -60,6 +60,54 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", init);
 
 window.addEventListener("click", () => {
-  // 클릭 시 원을 그립니다.
-  createRing();
+  // 여기에 카운트다운 관련 로직을 전부 작성합니다.
+  const texts = document.querySelectorAll("span");
+
+  const countDownOption = {
+    opacity: 1,
+    scale: 1,
+    duration: 0.4,
+    ease: "Power4.easeOut",
+  };
+
+  gsap.fromTo(
+    texts[0],
+    { opacity: 0, scale: 5 },
+    {
+      ...countDownOption,
+    }
+  );
+  gsap.fromTo(
+    texts[1],
+    { opacity: 0, scale: 5 },
+    {
+      ...countDownOption,
+      delay: 1,
+      onStart: () => (texts[0].style.opacity = 0),
+    }
+  );
+  gsap.fromTo(
+    texts[2],
+    { opacity: 0, scale: 5 },
+    {
+      ...countDownOption,
+      delay: 2,
+      onStart: () => (texts[1].style.opacity = 0),
+    }
+  );
+
+  const ringImage = document.querySelector("#ring");
+  gsap.fromTo(
+    ringImage,
+    { opacity: 1 },
+    {
+      opacity: 0,
+      duration: 1,
+      delay: 3, // 3초간의 카운트다운이 끝나고 보여줘야 하므로.
+      onStart: () => {
+        createRing(); // Add particles animation
+        texts[2].style.opacity = 0;
+      },
+    }
+  );
 });
