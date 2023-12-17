@@ -1,7 +1,7 @@
 # Confetti
 
-## 보일러플레이트
+## Documentation
 
-[코드 예제](./boilerplate/)
+[documentation](./docs/_.md)
 
-## 콘페티 이펙트의 핵심 원리
+## App Demo
