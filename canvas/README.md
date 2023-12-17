@@ -13,3 +13,6 @@ html5 canvas를 연습합니다.
 
 **Countdown**<br>
 [Countdown](./countdown/README.md)
+
+**Confetti**<br>
+[Confetti](./confetti/README.md)
