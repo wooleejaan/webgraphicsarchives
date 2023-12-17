@@ -1,19 +1,15 @@
 # Canvas
 
-html canvas를 연습합니다.
+html5 canvas를 연습합니다.
 
-### Raindrops with a gooey effect
-
+**Raindrops with a gooey effect**<br>
 [Raindrops with a gooey effect](./simple-particle/README.md)
 
-### Tree
-
+**Tree**<br>
 [Tree](./draw-growing-tree/README.md)
 
-### Fireworks
-
+**Fireworks**<br>
 [Fireworks](./fireworks/README.md)
 
-### Countdown
-
+**Countdown**<br>
 [Countdown](./countdown/README.md)
