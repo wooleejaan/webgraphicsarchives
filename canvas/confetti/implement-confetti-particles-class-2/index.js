@@ -19,9 +19,9 @@ function init() {
   ctx.scale(dpr, dpr);
 }
 
-function confetti({ x, y, count, deg }) {
+function confetti({ x, y, count, deg, colors }) {
   for (let i = 0; i < count; i++) {
-    particles.push(new Particle(x, y, deg));
+    particles.push(new Particle(x, y, deg, colors));
   }
 }
 
@@ -39,7 +39,13 @@ function render() {
     for (let i = particles.length - 1; i >= 0; i--) {
       particles[i].update();
       particles[i].draw(ctx);
+
+      // 투명도를 기준으로 배열에거 제거합니다.
+      if (particles[i].opacity < 0) {
+        particles.splice(i, 1);
+      }
     }
+    // 잘 제거됐는지 확인하려면, console.log(particles.length)
 
     then = now - (delta % interval);
   };
@@ -48,10 +54,12 @@ function render() {
 
 window.addEventListener("click", () => {
   confetti({
-    x: 0,
-    y: canvasHeight / 2,
+    x: 0, // 0 ~ 1 사이 값을 편하게 넣으면 됩니다.
+    y: 0.5, // 0 ~ 1 사이 값을 편하게 넣으면 됩니다.
+    // y: canvasHeight / 2,
     count: 10,
     deg: -50,
+    colors: ["#FF0000"],
   });
 });
 window.addEventListener("resize", init);
