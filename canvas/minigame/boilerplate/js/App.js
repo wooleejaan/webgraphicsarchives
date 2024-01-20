@@ -34,7 +34,7 @@ export default class App {
     const frame = () => {
       requestAnimationFrame(frame);
       now = Date.now();
-      delta = now - delta;
+      delta = now - then; // (now - then)이 맞음 (now - delta는 오타임)
       if (delta < App.interval) return;
 
       App.ctx.clearRect(0, 0, App.width, App.height);
