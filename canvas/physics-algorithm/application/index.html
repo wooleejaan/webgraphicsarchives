@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Rope Physics</title>
+  </head>
+  <body>
+    <!-- 캔버스에서 빛이 glowing되는 효과를 주려면, blur가 많이 들어가야 함. -->
+    <!-- 이미지 파일의 화질이 좋다보면, 블러 처리가 여러움. 낮은 px의 이미지 파일을 강제로 크기를 키워서 캔버스에서 보여주면 glowing 효과 만들 수 있음 -->
+    <!-- 또한, 캔버스에서 직접 그라데이션 효과를 넣거나, 비슷한 효과를 내려면 cpu 연산에도 무리를 줄 수 있으므로 이렇게 이미지 파일을 적절히 활용하는 게 좋은 트릭임. -->
+    <img
+      src="./assets/glowing.png"
+      id="light-img"
+      class="asset-img"
+      alt="glowing-img"
+    />
+    <canvas></canvas>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
